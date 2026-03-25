@@ -155,7 +155,9 @@
     }
 
     .genre-button,
-    .shuffle-button {
+    .shuffle-button,
+    .back-button,
+    .card-button {
       border: 0;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease;
@@ -203,7 +205,9 @@
     }
 
     .genre-button:hover,
-    .shuffle-button:hover {
+    .shuffle-button:hover,
+    .back-button:hover,
+    .card-button:hover {
       transform: translateY(-2px);
       filter: brightness(1.03);
     }
@@ -280,6 +284,183 @@
       opacity: 0;
       transform: translateY(18px);
       animation: fadeUp 0.65s ease forwards;
+    }
+
+    .card-button {
+      width: 100%;
+      color: inherit;
+      text-align: left;
+      background: transparent;
+      padding: 0;
+    }
+
+    .card-button .card {
+      min-height: 100%;
+    }
+
+    .card-hint {
+      margin-top: 18px;
+      color: #9a6a3f;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .detail-shell {
+      animation: fadeUp 0.65s ease forwards;
+    }
+
+    .detail-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      border-radius: 28px;
+      background: var(--surface-strong);
+      box-shadow: var(--shadow-card);
+    }
+
+    .detail-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -48px -52px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 36px;
+      background: linear-gradient(135deg, rgba(255, 205, 160, 0.42), rgba(255, 255, 255, 0));
+      transform: rotate(12deg);
+      pointer-events: none;
+    }
+
+    .detail-top {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .back-button {
+      align-self: flex-start;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: rgba(252, 244, 235, 0.98);
+      color: #684833;
+      font-size: 0.94rem;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(96, 70, 53, 0.12);
+    }
+
+    .detail-title {
+      margin: 0;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .detail-description {
+      margin: 0;
+      max-width: 760px;
+      color: var(--text-sub);
+      line-height: 1.8;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 22px;
+    }
+
+    .detail-section {
+      position: relative;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 251, 246, 0.95);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .detail-section h3 {
+      margin: 0 0 16px;
+      font-size: 1.12rem;
+    }
+
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .ingredient-item {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .ingredient-name {
+      font-weight: 700;
+    }
+
+    .ingredient-amount {
+      color: var(--text-sub);
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      padding-left: 12px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(180deg, #ebc79f, #dfb07f);
+    }
+
+    .timeline-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .timeline-number {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f2ba7f, #d98b46);
+      color: #fffaf4;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(179, 118, 61, 0.24);
+    }
+
+    .timeline-body {
+      padding-top: 5px;
+      color: var(--text-sub);
+      line-height: 1.75;
+    }
+
+    .detail-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .advice {
+      margin: 0;
+      color: var(--text-sub);
+      line-height: 1.8;
     }
 
     .card::before {
@@ -390,6 +571,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
       .result-header {
         flex-direction: column;
         align-items: stretch;
@@ -418,12 +603,35 @@
         grid-template-columns: 1fr;
       }
 
+      .ingredients-grid,
+      .detail-meta {
+        grid-template-columns: 1fr;
+      }
+
       .genre-button {
         padding: 15px 16px;
       }
 
       .card {
         min-height: auto;
+      }
+
+      .detail-card {
+        padding: 20px;
+      }
+
+      .timeline {
+        padding-left: 0;
+      }
+
+      .timeline-step {
+        grid-template-columns: 34px 1fr;
+        gap: 12px;
+      }
+
+      .timeline-number {
+        width: 34px;
+        height: 34px;
       }
     }
   </style>
@@ -461,52 +669,882 @@
   <script>
     const okazuData = {
       "和食": [
-        { name: "肉じゃが", description: "甘辛い味付けでごはんが進む定番煮物です。", time: "約30分", difficulty: "★★☆" },
-        { name: "ぶりの照り焼き", description: "香ばしい照りが食欲をそそる魚おかずです。", time: "約20分", difficulty: "★★☆" },
-        { name: "ほうれん草の胡麻和え", description: "あと一品にちょうどいい、やさしい副菜です。", time: "約10分", difficulty: "★☆☆" },
-        { name: "鶏のつくね焼き", description: "ふんわり食感と甘辛だれが相性抜群です。", time: "約25分", difficulty: "★★☆" },
-        { name: "さばの味噌煮", description: "味噌のコクが染みた、ごはん向きの一皿です。", time: "約25分", difficulty: "★★★" },
-        { name: "だし巻き卵", description: "だしの香りが広がる、ほっとする定番です。", time: "約15分", difficulty: "★★☆" },
-        { name: "筑前煮", description: "根菜の旨みが楽しめる彩り豊かな煮物です。", time: "約35分", difficulty: "★★★" },
-        { name: "豆腐ハンバーグ", description: "軽やかな食べ心地で満足感もある和風おかずです。", time: "約25分", difficulty: "★★☆" },
-        { name: "れんこんきんぴら", description: "シャキッとした食感が楽しい常備菜向きの一品です。", time: "約12分", difficulty: "★☆☆" },
-        { name: "鮭の南蛮漬け", description: "さっぱり食べられて作り置きにも向いています。", time: "約25分", difficulty: "★★☆" }
+        {
+          name: "肉じゃが",
+          description: "甘辛い味付けでごはんが進む定番煮物です。",
+          time: "約30分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "牛こま切れ肉", amount: "180g" },
+            { name: "じゃがいも", amount: "2個" },
+            { name: "玉ねぎ", amount: "1個" },
+            { name: "にんじん", amount: "1/2本" },
+            { name: "しらたき", amount: "100g" },
+            { name: "しょうゆ", amount: "大さじ2" },
+            { name: "みりん", amount: "大さじ2" }
+          ],
+          steps: [
+            "じゃがいも、玉ねぎ、にんじんを食べやすく切り、しらたきは下ゆでしておきます。",
+            "鍋で牛肉を軽く炒め、野菜としらたきを加えて油を回します。",
+            "だし200ml、しょうゆ、みりん、砂糖大さじ1を加えて落としぶたをし、やわらかくなるまで煮ます。",
+            "汁気が少し残るくらいまで煮詰めて味をなじませます。"
+          ],
+          advice: "じゃがいもは煮崩れしにくい大きさに切ると仕上がりがきれいです。少し冷ましてから温め直すと味がより染みます。"
+        },
+        {
+          name: "ぶりの照り焼き",
+          description: "香ばしい照りが食欲をそそる魚おかずです。",
+          time: "約20分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "ぶり切り身", amount: "2切れ" },
+            { name: "塩", amount: "少々" },
+            { name: "小麦粉", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "大さじ1と1/2" },
+            { name: "みりん", amount: "大さじ1と1/2" },
+            { name: "酒", amount: "大さじ1" },
+            { name: "砂糖", amount: "小さじ2" }
+          ],
+          steps: [
+            "ぶりに塩を振って10分ほど置き、水気を拭いて小麦粉を薄くまぶします。",
+            "フライパンでぶりの両面をこんがり焼きます。",
+            "余分な油を拭き、しょうゆ、みりん、酒、砂糖を合わせたたれを加えます。",
+            "たれを煮絡めながら照りが出るまで仕上げます。"
+          ],
+          advice: "最初に塩を振って臭みを抜くと仕上がりがすっきりします。たれを入れたあとは焦げやすいので手早く絡めてください。"
+        },
+        {
+          name: "ほうれん草の胡麻和え",
+          description: "あと一品にちょうどいい、やさしい副菜です。",
+          time: "約10分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "ほうれん草", amount: "1束" },
+            { name: "白すりごま", amount: "大さじ2" },
+            { name: "しょうゆ", amount: "小さじ2" },
+            { name: "砂糖", amount: "小さじ1" },
+            { name: "だし", amount: "小さじ1" }
+          ],
+          steps: [
+            "ほうれん草をさっとゆでて冷水に取り、水気をしっかり絞って3cm幅に切ります。",
+            "ボウルにすりごま、しょうゆ、砂糖、だしを合わせて和え衣を作ります。",
+            "ほうれん草を加えて全体をやさしく混ぜます。"
+          ],
+          advice: "水気をよく絞ると味がぼやけません。食べる直前に和えると香りがきれいに残ります。"
+        },
+        {
+          name: "鶏のつくね焼き",
+          description: "ふんわり食感と甘辛だれが相性抜群です。",
+          time: "約25分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "鶏ひき肉", amount: "250g" },
+            { name: "長ねぎ", amount: "1/3本" },
+            { name: "卵", amount: "1個" },
+            { name: "片栗粉", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "みりん", amount: "大さじ1" },
+            { name: "砂糖", amount: "小さじ2" }
+          ],
+          steps: [
+            "長ねぎをみじん切りにし、鶏ひき肉、卵、片栗粉、しょうゆと混ぜます。",
+            "小判形にまとめ、フライパンで両面をこんがり焼きます。",
+            "火が通ったらみりん、しょうゆ大さじ1、砂糖を加えて煮絡めます。",
+            "たれにとろみが出たら全体に絡めて仕上げます。"
+          ],
+          advice: "肉だねは練りすぎず、さっくりまとめるとやわらかく仕上がります。少し厚みをそろえると焼きむらが出にくいです。"
+        },
+        {
+          name: "さばの味噌煮",
+          description: "味噌のコクが染みた、ごはん向きの一皿です。",
+          time: "約25分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "さば切り身", amount: "2切れ" },
+            { name: "しょうが", amount: "1かけ" },
+            { name: "味噌", amount: "大さじ2" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "みりん", amount: "大さじ2" },
+            { name: "酒", amount: "100ml" },
+            { name: "砂糖", amount: "大さじ1" }
+          ],
+          steps: [
+            "しょうがは薄切りにし、さばは熱湯をかけて臭みを取ります。",
+            "鍋に酒、水100ml、砂糖、みりん、しょうがを入れて煮立てます。",
+            "さばを入れて落としぶたをし、中火で煮ます。",
+            "煮汁少量で味噌を溶き入れ、しょうゆを加えてさらに煮詰めます。"
+          ],
+          advice: "味噌は最後に加えると香りが飛びにくくなります。煮汁を時々かけながら煮ると味が均一に入ります。"
+        },
+        {
+          name: "だし巻き卵",
+          description: "だしの香りが広がる、ほっとする定番です。",
+          time: "約15分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "卵", amount: "3個" },
+            { name: "だし", amount: "大さじ3" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "みりん", amount: "小さじ1" },
+            { name: "塩", amount: "少々" },
+            { name: "油", amount: "適量" }
+          ],
+          steps: [
+            "卵を溶きほぐし、だし、しょうゆ、みりん、塩を混ぜます。",
+            "卵焼き器に油を薄くひき、卵液を数回に分けて流し入れます。",
+            "半熟のうちに奥から手前へ巻き、空いたところに卵液を追加して同様に巻きます。",
+            "全体に火が通ったら形を整えて切り分けます。"
+          ],
+          advice: "火加減は中弱火が安定です。卵液はよく混ぜすぎず、空気を入れないほうがきれいに焼けます。"
+        },
+        {
+          name: "筑前煮",
+          description: "根菜の旨みが楽しめる彩り豊かな煮物です。",
+          time: "約35分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "鶏もも肉", amount: "180g" },
+            { name: "れんこん", amount: "100g" },
+            { name: "ごぼう", amount: "1/2本" },
+            { name: "にんじん", amount: "1/2本" },
+            { name: "こんにゃく", amount: "100g" },
+            { name: "しょうゆ", amount: "大さじ2" },
+            { name: "みりん", amount: "大さじ2" },
+            { name: "だし", amount: "250ml" }
+          ],
+          steps: [
+            "材料を一口大に切り、ごぼうとれんこんは水にさらします。",
+            "鍋で鶏肉を炒め、根菜とこんにゃくを加えてさらに炒めます。",
+            "だしを注ぎ、しょうゆ、みりん、砂糖大さじ1を加えて落としぶたをします。",
+            "野菜がやわらかくなるまで煮て、最後に汁気を少し飛ばします。"
+          ],
+          advice: "最初に具材を炒めるとコクが増します。れんこんは厚みをそろえると食感が均一になります。"
+        },
+        {
+          name: "豆腐ハンバーグ",
+          description: "軽やかな食べ心地で満足感もある和風おかずです。",
+          time: "約25分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "木綿豆腐", amount: "150g" },
+            { name: "鶏ひき肉", amount: "180g" },
+            { name: "玉ねぎ", amount: "1/4個" },
+            { name: "パン粉", amount: "大さじ3" },
+            { name: "卵", amount: "1個" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "大根おろし", amount: "適量" }
+          ],
+          steps: [
+            "豆腐は水切りし、玉ねぎはみじん切りにします。",
+            "ボウルに豆腐、鶏ひき肉、玉ねぎ、パン粉、卵、塩少々を入れて混ぜます。",
+            "形を整えてフライパンで両面を焼き、中まで火を通します。",
+            "しょうゆとみりん大さじ1を軽く煮立ててたれにし、大根おろしを添えます。"
+          ],
+          advice: "豆腐の水切りが甘いと崩れやすくなります。焼く前に少し冷やすと成形しやすいです。"
+        },
+        {
+          name: "れんこんきんぴら",
+          description: "シャキッとした食感が楽しい常備菜向きの一品です。",
+          time: "約12分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "れんこん", amount: "180g" },
+            { name: "ごま油", amount: "小さじ2" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "みりん", amount: "大さじ1" },
+            { name: "砂糖", amount: "小さじ1" },
+            { name: "白ごま", amount: "小さじ1" }
+          ],
+          steps: [
+            "れんこんは薄切りにして水にさらし、水気を切ります。",
+            "フライパンにごま油を熱し、れんこんをさっと炒めます。",
+            "しょうゆ、みりん、砂糖を加えて汁気がなくなるまで炒めます。",
+            "白ごまを振って仕上げます。"
+          ],
+          advice: "炒めすぎないことでシャキッとした食感が残ります。れんこんは切ったらすぐ水にさらすと変色を防げます。"
+        },
+        {
+          name: "鮭の南蛮漬け",
+          description: "さっぱり食べられて作り置きにも向いています。",
+          time: "約25分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "鮭切り身", amount: "2切れ" },
+            { name: "玉ねぎ", amount: "1/4個" },
+            { name: "にんじん", amount: "1/4本" },
+            { name: "片栗粉", amount: "大さじ2" },
+            { name: "酢", amount: "大さじ2" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "砂糖", amount: "大さじ1" }
+          ],
+          steps: [
+            "玉ねぎは薄切り、にんじんは細切りにし、酢、しょうゆ、砂糖、水大さじ2と合わせます。",
+            "鮭は食べやすく切って片栗粉をまぶし、フライパンで焼きます。",
+            "焼き上がった鮭を熱いうちに南蛮だれへ漬け込みます。",
+            "野菜とともに15分ほどなじませてから盛り付けます。"
+          ],
+          advice: "鮭を熱いうちに漬けると味が入りやすくなります。少し時間を置くと酸味がまろやかになります。"
+        }
       ],
       "洋食": [
-        { name: "チキンソテー レモンバター", description: "香ばしく焼いた鶏肉を爽やかな風味で楽しめます。", time: "約20分", difficulty: "★★☆" },
-        { name: "ミートボールのトマト煮", description: "トマトの旨みで食べやすい、ごちそう感のある一品です。", time: "約30分", difficulty: "★★☆" },
-        { name: "きのこグラタン", description: "とろりとしたソースがうれしい熱々メニューです。", time: "約25分", difficulty: "★★★" },
-        { name: "ポテトサラダ", description: "クリーミーで食卓に合わせやすい万能副菜です。", time: "約18分", difficulty: "★☆☆" },
-        { name: "白身魚のムニエル", description: "外は香ばしく中はふっくら仕上がる定番洋食です。", time: "約18分", difficulty: "★★☆" },
-        { name: "ラタトゥイユ", description: "野菜をたっぷり味わえる彩り豊かな煮込みです。", time: "約30分", difficulty: "★★☆" },
-        { name: "アスパラベーコンソテー", description: "手早く作れて食感も楽しい人気の組み合わせです。", time: "約10分", difficulty: "★☆☆" },
-        { name: "ハニーマスタードチキン", description: "甘みと酸味のバランスが絶妙な主菜です。", time: "約20分", difficulty: "★★☆" },
-        { name: "キャロットラペ", description: "さっぱりしていて箸休めにもぴったりです。", time: "約8分", difficulty: "★☆☆" },
-        { name: "えびとブロッコリーのガーリック炒め", description: "香りよく仕上がる華やかな洋風おかずです。", time: "約15分", difficulty: "★★☆" }
+        {
+          name: "チキンソテー レモンバター",
+          description: "香ばしく焼いた鶏肉を爽やかな風味で楽しめます。",
+          time: "約20分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "鶏もも肉", amount: "1枚" },
+            { name: "塩", amount: "少々" },
+            { name: "こしょう", amount: "少々" },
+            { name: "バター", amount: "15g" },
+            { name: "レモン汁", amount: "大さじ1" },
+            { name: "にんにく", amount: "1/2かけ" },
+            { name: "オリーブオイル", amount: "小さじ2" }
+          ],
+          steps: [
+            "鶏もも肉に塩こしょうを振り、厚い部分は軽く開きます。",
+            "フライパンにオリーブオイルを熱し、皮目からこんがり焼きます。",
+            "裏返して火を通し、にんにく、バター、レモン汁を加えます。",
+            "ソースをかけながら照りよく仕上げます。"
+          ],
+          advice: "皮目は触りすぎずに焼くとパリッとします。仕上げのレモンは加熱しすぎないほうが香りが残ります。"
+        },
+        {
+          name: "ミートボールのトマト煮",
+          description: "トマトの旨みで食べやすい、ごちそう感のある一品です。",
+          time: "約30分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "合いびき肉", amount: "250g" },
+            { name: "玉ねぎ", amount: "1/4個" },
+            { name: "パン粉", amount: "大さじ3" },
+            { name: "卵", amount: "1個" },
+            { name: "カットトマト缶", amount: "1/2缶" },
+            { name: "ケチャップ", amount: "大さじ1" },
+            { name: "コンソメ", amount: "小さじ1" }
+          ],
+          steps: [
+            "玉ねぎをみじん切りにし、合いびき肉、パン粉、卵、塩少々と混ぜて丸めます。",
+            "フライパンでミートボールの表面を焼き固めます。",
+            "トマト缶、ケチャップ、コンソメ、水100mlを加えて煮込みます。",
+            "ソースにとろみが出たら味を調えて完成です。"
+          ],
+          advice: "肉だねは手早く混ぜるとふっくらします。先に表面を焼くことで煮込んでも崩れにくくなります。"
+        },
+        {
+          name: "きのこグラタン",
+          description: "とろりとしたソースがうれしい熱々メニューです。",
+          time: "約25分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "しめじ", amount: "1/2パック" },
+            { name: "まいたけ", amount: "1/2パック" },
+            { name: "玉ねぎ", amount: "1/4個" },
+            { name: "バター", amount: "20g" },
+            { name: "薄力粉", amount: "大さじ2" },
+            { name: "牛乳", amount: "250ml" },
+            { name: "ピザ用チーズ", amount: "50g" }
+          ],
+          steps: [
+            "きのこと玉ねぎをバターで炒め、しんなりしたら薄力粉を加えます。",
+            "粉っぽさがなくなったら牛乳を少しずつ加えて混ぜます。",
+            "とろみが付いたら塩こしょうで味を調え、耐熱皿へ入れます。",
+            "チーズをのせてトースターで焼き色が付くまで焼きます。"
+          ],
+          advice: "牛乳は数回に分けて加えるとだまになりにくいです。表面に焼き色が付くと香ばしさがぐっと増します。"
+        },
+        {
+          name: "ポテトサラダ",
+          description: "クリーミーで食卓に合わせやすい万能副菜です。",
+          time: "約18分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "じゃがいも", amount: "2個" },
+            { name: "きゅうり", amount: "1/2本" },
+            { name: "ハム", amount: "3枚" },
+            { name: "マヨネーズ", amount: "大さじ3" },
+            { name: "酢", amount: "小さじ1" },
+            { name: "塩", amount: "少々" },
+            { name: "こしょう", amount: "少々" }
+          ],
+          steps: [
+            "じゃがいもをゆでて熱いうちにつぶし、酢と塩少々を混ぜます。",
+            "きゅうりは薄切りにして塩もみし、ハムは細切りにします。",
+            "粗熱が取れたじゃがいもにきゅうり、ハム、マヨネーズを加えて和えます。",
+            "こしょうで味を整えます。"
+          ],
+          advice: "じゃがいもが熱いうちに下味を付けると味が入りやすいです。きゅうりの水気はしっかり絞ると水っぽくなりません。"
+        },
+        {
+          name: "白身魚のムニエル",
+          description: "外は香ばしく中はふっくら仕上がる定番洋食です。",
+          time: "約18分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "白身魚", amount: "2切れ" },
+            { name: "塩", amount: "少々" },
+            { name: "こしょう", amount: "少々" },
+            { name: "小麦粉", amount: "大さじ1" },
+            { name: "バター", amount: "15g" },
+            { name: "レモン", amount: "1/4個" },
+            { name: "オリーブオイル", amount: "小さじ2" }
+          ],
+          steps: [
+            "白身魚に塩こしょうを振り、小麦粉を薄くまぶします。",
+            "フライパンにオリーブオイルを熱し、魚の両面を焼きます。",
+            "最後にバターを加えて香りを付けます。",
+            "器に盛り、レモンを添えます。"
+          ],
+          advice: "粉は薄く付けると軽い食感になります。焼き始めはあまり動かさないほうが表面がきれいに仕上がります。"
+        },
+        {
+          name: "ラタトゥイユ",
+          description: "野菜をたっぷり味わえる彩り豊かな煮込みです。",
+          time: "約30分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "なす", amount: "1本" },
+            { name: "ズッキーニ", amount: "1/2本" },
+            { name: "パプリカ", amount: "1/2個" },
+            { name: "玉ねぎ", amount: "1/2個" },
+            { name: "カットトマト缶", amount: "1/2缶" },
+            { name: "にんにく", amount: "1かけ" },
+            { name: "オリーブオイル", amount: "大さじ1" }
+          ],
+          steps: [
+            "野菜を大きさをそろえて切り、にんにくはみじん切りにします。",
+            "鍋でにんにくと玉ねぎを炒め、香りが立ったら残りの野菜を加えます。",
+            "トマト缶と塩少々を加え、ふたをして蒸し煮にします。",
+            "野菜がやわらかくなったら味を調えます。"
+          ],
+          advice: "野菜は大きさをそろえると火通りが均一になります。冷やしてもおいしいので作り置きにも向いています。"
+        },
+        {
+          name: "アスパラベーコンソテー",
+          description: "手早く作れて食感も楽しい人気の組み合わせです。",
+          time: "約10分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "アスパラガス", amount: "4本" },
+            { name: "ベーコン", amount: "4枚" },
+            { name: "オリーブオイル", amount: "小さじ1" },
+            { name: "塩", amount: "少々" },
+            { name: "こしょう", amount: "少々" },
+            { name: "粒マスタード", amount: "お好みで" }
+          ],
+          steps: [
+            "アスパラは根元のかたい部分を除き、食べやすい長さに切ります。",
+            "フライパンでベーコンを炒め、脂が出たらアスパラを加えます。",
+            "塩こしょうで味を調え、好みで粒マスタードを添えます。"
+          ],
+          advice: "ベーコンの塩気があるので塩は控えめで十分です。アスパラは炒めすぎないと食感が残ります。"
+        },
+        {
+          name: "ハニーマスタードチキン",
+          description: "甘みと酸味のバランスが絶妙な主菜です。",
+          time: "約20分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "鶏もも肉", amount: "1枚" },
+            { name: "塩", amount: "少々" },
+            { name: "こしょう", amount: "少々" },
+            { name: "はちみつ", amount: "大さじ1" },
+            { name: "粒マスタード", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "オリーブオイル", amount: "小さじ2" }
+          ],
+          steps: [
+            "鶏もも肉に塩こしょうを振り、フライパンで皮目から焼きます。",
+            "中まで火が通ったら余分な油を拭き取ります。",
+            "はちみつ、粒マスタード、しょうゆを合わせて加え、全体に絡めます。",
+            "つやが出たら食べやすく切って盛り付けます。"
+          ],
+          advice: "はちみつ入りのたれは焦げやすいので、火を弱めてから絡めると失敗しにくいです。"
+        },
+        {
+          name: "キャロットラペ",
+          description: "さっぱりしていて箸休めにもぴったりです。",
+          time: "約8分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "にんじん", amount: "1本" },
+            { name: "オリーブオイル", amount: "大さじ1" },
+            { name: "酢", amount: "大さじ1" },
+            { name: "はちみつ", amount: "小さじ1" },
+            { name: "塩", amount: "少々" },
+            { name: "くるみ", amount: "適量" }
+          ],
+          steps: [
+            "にんじんを千切りにして塩少々を振り、しんなりしたら水気を絞ります。",
+            "オリーブオイル、酢、はちみつを合わせてドレッシングを作ります。",
+            "にんじんを和え、好みで刻んだくるみを散らします。"
+          ],
+          advice: "少し置くと味がなじみます。にんじんは細めに切ると口当たりが軽く仕上がります。"
+        },
+        {
+          name: "えびとブロッコリーのガーリック炒め",
+          description: "香りよく仕上がる華やかな洋風おかずです。",
+          time: "約15分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "むきえび", amount: "180g" },
+            { name: "ブロッコリー", amount: "1/2株" },
+            { name: "にんにく", amount: "1かけ" },
+            { name: "オリーブオイル", amount: "大さじ1" },
+            { name: "塩", amount: "少々" },
+            { name: "こしょう", amount: "少々" },
+            { name: "白ワイン", amount: "大さじ1" }
+          ],
+          steps: [
+            "ブロッコリーは小房に分けてさっと下ゆでします。",
+            "フライパンでにんにくとオリーブオイルを熱し、えびを炒めます。",
+            "色が変わったらブロッコリーと白ワインを加えます。",
+            "塩こしょうで味を調え、全体をさっと炒め合わせます。"
+          ],
+          advice: "えびは火を通しすぎるとかたくなるので、色が変わったら次の工程へ進むと食感が残ります。"
+        }
       ],
       "中華": [
-        { name: "麻婆豆腐", description: "ピリッとした辛さで食欲を刺激する定番中華です。", time: "約15分", difficulty: "★★☆" },
-        { name: "青椒肉絲", description: "シャキシャキ野菜と細切り肉がよく合います。", time: "約20分", difficulty: "★★☆" },
-        { name: "エビチリ", description: "甘辛ソースでえびを華やかに楽しめる一皿です。", time: "約20分", difficulty: "★★★" },
-        { name: "回鍋肉", description: "濃いめの味付けでごはんが止まらない主菜です。", time: "約18分", difficulty: "★★☆" },
-        { name: "春雨サラダ", description: "さっぱり食べられる中華風の副菜です。", time: "約12分", difficulty: "★☆☆" },
-        { name: "油淋鶏", description: "香ばしい鶏肉にねぎだれがよく絡みます。", time: "約25分", difficulty: "★★★" },
-        { name: "八宝菜", description: "具だくさんで栄養バランスも取りやすい一品です。", time: "約22分", difficulty: "★★☆" },
-        { name: "棒棒鶏", description: "ごまだれのコクが楽しめる冷菜メニューです。", time: "約15分", difficulty: "★★☆" },
-        { name: "にら玉", description: "手早く作れて彩りも良い定番炒めです。", time: "約10分", difficulty: "★☆☆" },
-        { name: "肉団子の甘酢あん", description: "甘酸っぱさで食べやすい人気のおかずです。", time: "約25分", difficulty: "★★☆" }
+        {
+          name: "麻婆豆腐",
+          description: "ピリッとした辛さで食欲を刺激する定番中華です。",
+          time: "約15分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "木綿豆腐", amount: "1丁" },
+            { name: "豚ひき肉", amount: "150g" },
+            { name: "長ねぎ", amount: "1/3本" },
+            { name: "豆板醤", amount: "小さじ1" },
+            { name: "甜麺醤", amount: "小さじ2" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "片栗粉", amount: "小さじ2" }
+          ],
+          steps: [
+            "豆腐は角切り、長ねぎはみじん切りにします。",
+            "フライパンでひき肉を炒め、豆板醤と甜麺醤を加えて香りを出します。",
+            "水150ml、しょうゆ、豆腐を加えて煮ます。",
+            "長ねぎを加え、水溶き片栗粉でとろみを付けます。"
+          ],
+          advice: "豆腐は一度下ゆですると崩れにくくなります。豆板醤は先に炒めると香りが立ちます。"
+        },
+        {
+          name: "青椒肉絲",
+          description: "シャキシャキ野菜と細切り肉がよく合います。",
+          time: "約20分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "豚こま切れ肉", amount: "180g" },
+            { name: "ピーマン", amount: "3個" },
+            { name: "たけのこ水煮", amount: "100g" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "オイスターソース", amount: "大さじ1" },
+            { name: "酒", amount: "大さじ1" },
+            { name: "片栗粉", amount: "小さじ2" }
+          ],
+          steps: [
+            "豚肉、ピーマン、たけのこを細切りにします。",
+            "豚肉にしょうゆ少々、酒、片栗粉をもみ込みます。",
+            "フライパンで豚肉を炒め、火が通ったら野菜を加えます。",
+            "オイスターソースとしょうゆで手早く味付けします。"
+          ],
+          advice: "野菜は強火で短時間に炒めると食感が残ります。肉は下味を付けておくとやわらかく仕上がります。"
+        },
+        {
+          name: "エビチリ",
+          description: "甘辛ソースでえびを華やかに楽しめる一皿です。",
+          time: "約20分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "むきえび", amount: "200g" },
+            { name: "長ねぎ", amount: "1/4本" },
+            { name: "しょうが", amount: "1/2かけ" },
+            { name: "ケチャップ", amount: "大さじ2" },
+            { name: "豆板醤", amount: "小さじ1" },
+            { name: "酒", amount: "大さじ1" },
+            { name: "片栗粉", amount: "小さじ2" }
+          ],
+          steps: [
+            "えびは背わたを除き、酒と片栗粉少々でもみます。",
+            "長ねぎとしょうがをみじん切りにし、フライパンで炒めます。",
+            "えびを加えて炒め、ケチャップ、豆板醤、水80mlを加えます。",
+            "水溶き片栗粉で軽くとろみを付けます。"
+          ],
+          advice: "えびは炒めすぎるとかたくなるので、色が変わったらすぐソースへなじませるのがコツです。"
+        },
+        {
+          name: "回鍋肉",
+          description: "濃いめの味付けでごはんが止まらない主菜です。",
+          time: "約18分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "豚バラ肉", amount: "180g" },
+            { name: "キャベツ", amount: "1/4玉" },
+            { name: "ピーマン", amount: "2個" },
+            { name: "長ねぎ", amount: "1/3本" },
+            { name: "甜麺醤", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "豆板醤", amount: "小さじ1" }
+          ],
+          steps: [
+            "豚バラ肉と野菜を食べやすく切ります。",
+            "フライパンで豚肉を炒め、脂が出たら長ねぎと豆板醤を加えます。",
+            "キャベツとピーマンを加えて強火で炒めます。",
+            "甜麺醤としょうゆを加えて手早く絡めます。"
+          ],
+          advice: "キャベツは大きめにちぎると食感が残ります。調味料は最後に入れると水っぽくなりにくいです。"
+        },
+        {
+          name: "春雨サラダ",
+          description: "さっぱり食べられる中華風の副菜です。",
+          time: "約12分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "春雨", amount: "40g" },
+            { name: "きゅうり", amount: "1/2本" },
+            { name: "ハム", amount: "3枚" },
+            { name: "酢", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "ごま油", amount: "小さじ1" },
+            { name: "砂糖", amount: "小さじ1" }
+          ],
+          steps: [
+            "春雨を表示通りに戻して食べやすく切ります。",
+            "きゅうりとハムを細切りにします。",
+            "酢、しょうゆ、ごま油、砂糖を合わせてたれを作ります。",
+            "全てを混ぜ合わせて味をなじませます。"
+          ],
+          advice: "春雨の水気をしっかり切ると味が薄まりません。冷蔵庫で少し冷やすとよりさっぱり食べられます。"
+        },
+        {
+          name: "油淋鶏",
+          description: "香ばしい鶏肉にねぎだれがよく絡みます。",
+          time: "約25分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "鶏もも肉", amount: "1枚" },
+            { name: "長ねぎ", amount: "1/3本" },
+            { name: "しょうゆ", amount: "大さじ2" },
+            { name: "酢", amount: "大さじ1" },
+            { name: "砂糖", amount: "小さじ2" },
+            { name: "片栗粉", amount: "大さじ2" },
+            { name: "ごま油", amount: "小さじ1" }
+          ],
+          steps: [
+            "鶏もも肉にしょうゆ少々で下味を付け、片栗粉をまぶします。",
+            "フライパンで両面を揚げ焼きにして中まで火を通します。",
+            "長ねぎをみじん切りにし、しょうゆ、酢、砂糖、ごま油と合わせてたれを作ります。",
+            "切り分けた鶏肉にたれをたっぷりかけます。"
+          ],
+          advice: "皮目から焼くと香ばしさが出ます。たれは食べる直前にかけるとカリッと感が残ります。"
+        },
+        {
+          name: "八宝菜",
+          description: "具だくさんで栄養バランスも取りやすい一品です。",
+          time: "約22分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "豚こま切れ肉", amount: "120g" },
+            { name: "白菜", amount: "2枚" },
+            { name: "にんじん", amount: "1/4本" },
+            { name: "しいたけ", amount: "2枚" },
+            { name: "うずら卵", amount: "4個" },
+            { name: "鶏ガラスープ", amount: "200ml" },
+            { name: "オイスターソース", amount: "大さじ1" },
+            { name: "片栗粉", amount: "小さじ2" }
+          ],
+          steps: [
+            "具材を食べやすく切り、豚肉は軽く下味を付けます。",
+            "フライパンで豚肉を炒め、野菜を順に加えます。",
+            "鶏ガラスープとオイスターソースを加えて煮ます。",
+            "うずら卵を加え、水溶き片栗粉でまとめます。"
+          ],
+          advice: "火の通りにくいにんじんから先に炒めると全体が均一に仕上がります。汁気を残しすぎないと味がぼやけません。"
+        },
+        {
+          name: "棒棒鶏",
+          description: "ごまだれのコクが楽しめる冷菜メニューです。",
+          time: "約15分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "鶏ささみ", amount: "3本" },
+            { name: "きゅうり", amount: "1本" },
+            { name: "白練りごま", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "酢", amount: "小さじ2" },
+            { name: "砂糖", amount: "小さじ1" },
+            { name: "ラー油", amount: "少々" }
+          ],
+          steps: [
+            "ささみをゆでて冷まし、細く裂きます。",
+            "きゅうりを細切りにして器に敷きます。",
+            "練りごま、しょうゆ、酢、砂糖、ラー油を混ぜてたれを作ります。",
+            "ささみを盛ってたれをかけます。"
+          ],
+          advice: "ささみはゆですぎるとかたくなるので、火を止めて余熱で仕上げるとしっとりします。"
+        },
+        {
+          name: "にら玉",
+          description: "手早く作れて彩りも良い定番炒めです。",
+          time: "約10分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "にら", amount: "1/2束" },
+            { name: "卵", amount: "3個" },
+            { name: "ごま油", amount: "小さじ2" },
+            { name: "鶏ガラスープの素", amount: "小さじ1/2" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "塩", amount: "少々" }
+          ],
+          steps: [
+            "にらは4cm幅に切り、卵は溶いておきます。",
+            "フライパンで卵を半熟状に炒めて一度取り出します。",
+            "ごま油を足し、にらをさっと炒めます。",
+            "卵を戻し、鶏ガラスープの素としょうゆで味付けします。"
+          ],
+          advice: "卵を先に半熟で取り出すとふんわり感が残ります。にらは炒めすぎないほうが香りよく仕上がります。"
+        },
+        {
+          name: "肉団子の甘酢あん",
+          description: "甘酸っぱさで食べやすい人気のおかずです。",
+          time: "約25分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "豚ひき肉", amount: "220g" },
+            { name: "玉ねぎ", amount: "1/4個" },
+            { name: "片栗粉", amount: "大さじ2" },
+            { name: "酢", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "砂糖", amount: "大さじ1" },
+            { name: "ケチャップ", amount: "大さじ1" }
+          ],
+          steps: [
+            "玉ねぎをみじん切りにし、豚ひき肉と片栗粉小さじ1、塩少々を混ぜて丸めます。",
+            "フライパンで肉団子を転がしながら焼きます。",
+            "酢、しょうゆ、砂糖、ケチャップ、水80mlを加えます。",
+            "残りの片栗粉でとろみを付けて肉団子に絡めます。"
+          ],
+          advice: "肉団子は小さめにすると火通りが早く均一です。甘酢あんは最後に強めの火で絡めるとつやが出ます。"
+        }
       ],
       "韓国料理": [
-        { name: "ヤンニョムチキン", description: "甘辛だれが絡む人気の韓国風チキンです。", time: "約25分", difficulty: "★★★" },
-        { name: "チャプチェ", description: "春雨と野菜の旨みが広がる定番の炒め物です。", time: "約20分", difficulty: "★★☆" },
-        { name: "チーズタッカルビ", description: "コクのある辛さで食卓が盛り上がる一皿です。", time: "約25分", difficulty: "★★★" },
-        { name: "キムチチヂミ", description: "外はカリッと中はもっちり食感が楽しめます。", time: "約15分", difficulty: "★★☆" },
-        { name: "ナムル盛り合わせ", description: "野菜を手軽に食べられる彩り副菜です。", time: "約12分", difficulty: "★☆☆" },
-        { name: "プルコギ", description: "甘めの味付けで食べやすい牛肉おかずです。", time: "約20分", difficulty: "★★☆" },
-        { name: "スンドゥブ風豆腐煮", description: "旨辛スープで体が温まる豆腐メニューです。", time: "約18分", difficulty: "★★☆" },
-        { name: "トッポギ", description: "もちもち食感と甘辛ソースがくせになります。", time: "約15分", difficulty: "★★☆" },
-        { name: "サムギョプサル風炒め", description: "豚肉と野菜を香ばしく楽しめる満足系おかずです。", time: "約18分", difficulty: "★★☆" },
-        { name: "ケランマリ", description: "韓国風のやさしい卵焼きで副菜にもぴったりです。", time: "約10分", difficulty: "★☆☆" }
+        {
+          name: "ヤンニョムチキン",
+          description: "甘辛だれが絡む人気の韓国風チキンです。",
+          time: "約25分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "鶏もも肉", amount: "1枚" },
+            { name: "片栗粉", amount: "大さじ3" },
+            { name: "コチュジャン", amount: "大さじ1" },
+            { name: "ケチャップ", amount: "大さじ1" },
+            { name: "はちみつ", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "白ごま", amount: "適量" }
+          ],
+          steps: [
+            "鶏肉を一口大に切って片栗粉をまぶします。",
+            "フライパンで揚げ焼きにして、表面をカリッと仕上げます。",
+            "コチュジャン、ケチャップ、はちみつ、しょうゆを合わせて温めます。",
+            "鶏肉にたれを絡め、白ごまを振ります。"
+          ],
+          advice: "たれは別で温めて最後に絡めると、鶏肉の食感が残ります。辛さはコチュジャンの量で調整できます。"
+        },
+        {
+          name: "チャプチェ",
+          description: "春雨と野菜の旨みが広がる定番の炒め物です。",
+          time: "約20分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "韓国春雨", amount: "80g" },
+            { name: "牛こま切れ肉", amount: "120g" },
+            { name: "にんじん", amount: "1/4本" },
+            { name: "ピーマン", amount: "2個" },
+            { name: "玉ねぎ", amount: "1/2個" },
+            { name: "しょうゆ", amount: "大さじ2" },
+            { name: "ごま油", amount: "大さじ1" }
+          ],
+          steps: [
+            "春雨を戻し、食べやすい長さに切ります。",
+            "牛肉と野菜を細切りにし、フライパンで順に炒めます。",
+            "春雨を加え、しょうゆ、砂糖小さじ2、ごま油で味付けします。",
+            "全体をよく混ぜながら炒め合わせます。"
+          ],
+          advice: "春雨に先に少し味を入れると全体がぼやけません。仕上げのごま油は最後に回しかけると香りが立ちます。"
+        },
+        {
+          name: "チーズタッカルビ",
+          description: "コクのある辛さで食卓が盛り上がる一皿です。",
+          time: "約25分",
+          difficulty: "★★★",
+          ingredients: [
+            { name: "鶏もも肉", amount: "250g" },
+            { name: "キャベツ", amount: "2枚" },
+            { name: "玉ねぎ", amount: "1/2個" },
+            { name: "さつまいも", amount: "1/4本" },
+            { name: "コチュジャン", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "大さじ1" },
+            { name: "ピザ用チーズ", amount: "80g" }
+          ],
+          steps: [
+            "鶏肉と野菜を食べやすく切り、コチュジャン、しょうゆ、みりん大さじ1で下味を付けます。",
+            "フライパンでさつまいも、玉ねぎ、キャベツ、鶏肉の順に加えて炒めます。",
+            "火が通ったら中央を空けてチーズを入れ、ふたをして溶かします。",
+            "チーズを絡めながら食べます。"
+          ],
+          advice: "さつまいもは薄めに切ると火通りが早いです。チーズは最後に加えてとろみを残すのが食べやすいです。"
+        },
+        {
+          name: "キムチチヂミ",
+          description: "外はカリッと中はもっちり食感が楽しめます。",
+          time: "約15分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "キムチ", amount: "80g" },
+            { name: "にら", amount: "1/3束" },
+            { name: "薄力粉", amount: "80g" },
+            { name: "片栗粉", amount: "大さじ1" },
+            { name: "卵", amount: "1個" },
+            { name: "水", amount: "100ml" },
+            { name: "ごま油", amount: "大さじ1" }
+          ],
+          steps: [
+            "キムチをざく切りにし、にらは4cm幅に切ります。",
+            "ボウルに薄力粉、片栗粉、卵、水を混ぜ、キムチとにらを加えます。",
+            "フライパンにごま油を熱し、生地を広げて両面を焼きます。",
+            "こんがりしたら食べやすく切ります。"
+          ],
+          advice: "ごま油をやや多めにすると外側が香ばしくなります。生地は厚くしすぎないほうがカリッと仕上がります。"
+        },
+        {
+          name: "ナムル盛り合わせ",
+          description: "野菜を手軽に食べられる彩り副菜です。",
+          time: "約12分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "もやし", amount: "1/2袋" },
+            { name: "ほうれん草", amount: "1/2束" },
+            { name: "にんじん", amount: "1/4本" },
+            { name: "ごま油", amount: "大さじ1" },
+            { name: "塩", amount: "少々" },
+            { name: "にんにくすりおろし", amount: "少々" },
+            { name: "白ごま", amount: "大さじ1" }
+          ],
+          steps: [
+            "野菜をそれぞれ食べやすく切り、さっとゆでます。",
+            "水気をしっかり絞ってボウルへ入れます。",
+            "ごま油、塩、にんにく、白ごまを加えて和えます。"
+          ],
+          advice: "野菜ごとに水気をきちんと切ると味がぼやけません。少し冷やすと味が締まって食べやすくなります。"
+        },
+        {
+          name: "プルコギ",
+          description: "甘めの味付けで食べやすい牛肉おかずです。",
+          time: "約20分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "牛こま切れ肉", amount: "200g" },
+            { name: "玉ねぎ", amount: "1/2個" },
+            { name: "にんじん", amount: "1/4本" },
+            { name: "ニラ", amount: "1/3束" },
+            { name: "しょうゆ", amount: "大さじ2" },
+            { name: "砂糖", amount: "大さじ1" },
+            { name: "ごま油", amount: "大さじ1" }
+          ],
+          steps: [
+            "牛肉にしょうゆ、砂糖、すりおろしにんにく少々、ごま油をもみ込みます。",
+            "野菜を食べやすく切り、フライパンで玉ねぎとにんじんを炒めます。",
+            "牛肉を加えて炒め、最後にニラを加えます。",
+            "全体に味が回ったら仕上げます。"
+          ],
+          advice: "牛肉は下味を少し置くとやわらかくなります。ニラは最後に入れて香りと彩りを残してください。"
+        },
+        {
+          name: "スンドゥブ風豆腐煮",
+          description: "旨辛スープで体が温まる豆腐メニューです。",
+          time: "約18分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "絹豆腐", amount: "1丁" },
+            { name: "あさり", amount: "100g" },
+            { name: "長ねぎ", amount: "1/3本" },
+            { name: "キムチ", amount: "50g" },
+            { name: "コチュジャン", amount: "小さじ2" },
+            { name: "鶏ガラスープ", amount: "300ml" },
+            { name: "卵", amount: "1個" }
+          ],
+          steps: [
+            "鍋でキムチとコチュジャンを軽く炒めます。",
+            "鶏ガラスープとあさりを加えて煮立てます。",
+            "豆腐を大きめに崩して加え、長ねぎも入れて煮ます。",
+            "仕上げに卵を落として半熟状にします。"
+          ],
+          advice: "豆腐は大きめに崩すと食べごたえが出ます。卵は火を止める直前に入れるととろりと仕上がります。"
+        },
+        {
+          name: "トッポギ",
+          description: "もちもち食感と甘辛ソースがくせになります。",
+          time: "約15分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "トッポギ", amount: "180g" },
+            { name: "さつま揚げ", amount: "2枚" },
+            { name: "長ねぎ", amount: "1/3本" },
+            { name: "コチュジャン", amount: "大さじ1" },
+            { name: "砂糖", amount: "大さじ1" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "水", amount: "180ml" }
+          ],
+          steps: [
+            "トッポギはかたい場合は軽く水に浸しておきます。",
+            "鍋に水、コチュジャン、砂糖、しょうゆを入れて煮立てます。",
+            "トッポギ、さつま揚げ、長ねぎを加えて煮ます。",
+            "ソースにとろみが付くまで混ぜながら加熱します。"
+          ],
+          advice: "煮詰めすぎると固くなりやすいので、とろみが出たら早めに火を止めるのがコツです。"
+        },
+        {
+          name: "サムギョプサル風炒め",
+          description: "豚肉と野菜を香ばしく楽しめる満足系おかずです。",
+          time: "約18分",
+          difficulty: "★★☆",
+          ingredients: [
+            { name: "豚バラ肉", amount: "180g" },
+            { name: "玉ねぎ", amount: "1/2個" },
+            { name: "もやし", amount: "1/2袋" },
+            { name: "キムチ", amount: "60g" },
+            { name: "ごま油", amount: "小さじ2" },
+            { name: "しょうゆ", amount: "小さじ1" },
+            { name: "白ごま", amount: "適量" }
+          ],
+          steps: [
+            "豚バラ肉と玉ねぎを食べやすく切ります。",
+            "フライパンで豚バラ肉を焼き、脂が出たら玉ねぎとキムチを加えます。",
+            "もやしを加えてさっと炒め、しょうゆで味を調えます。",
+            "白ごまを振って仕上げます。"
+          ],
+          advice: "豚肉の脂で炒めるとコクが出るので、ごま油は入れすぎないほうがバランスが取りやすいです。"
+        },
+        {
+          name: "ケランマリ",
+          description: "韓国風のやさしい卵焼きで副菜にもぴったりです。",
+          time: "約10分",
+          difficulty: "★☆☆",
+          ingredients: [
+            { name: "卵", amount: "3個" },
+            { name: "にんじん", amount: "少量" },
+            { name: "青ねぎ", amount: "1本" },
+            { name: "塩", amount: "少々" },
+            { name: "ごま油", amount: "小さじ1" },
+            { name: "牛乳", amount: "大さじ1" }
+          ],
+          steps: [
+            "にんじんと青ねぎを細かく刻み、卵と牛乳、塩に混ぜます。",
+            "卵焼き器にごま油を薄くひき、卵液を数回に分けて焼きます。",
+            "巻きながら火を通し、形を整えます。",
+            "食べやすく切って盛り付けます。"
+          ],
+          advice: "牛乳を少し入れるとやわらかく仕上がります。野菜は細かく刻むと巻きやすくなります。"
+        }
       ]
     };
 
@@ -524,6 +1562,8 @@
     const shuffleButton = document.getElementById("shuffleButton");
 
     let currentGenre = "";
+    let currentSuggestions = [];
+    let selectedItem = null;
 
     function shuffleArray(list) {
       const copy = [...list];
@@ -548,35 +1588,126 @@
 
     function renderCards(items) {
       const cardsMarkup = items.map((item, index) => `
-        <article class="card" style="animation-delay: ${index * 0.08}s;">
-          <div class="card-top">
-            <span class="badge">おすすめ ${index + 1}</span>
-          </div>
-          <h3>${item.name}</h3>
-          <p class="description">${item.description}</p>
-          <div class="meta">
-            <div class="meta-item">
-              <span class="meta-label">調理時間</span>
-              <span class="meta-value">${item.time}</span>
+        <button class="card-button" type="button" data-index="${index}" aria-label="${item.name}の詳細を見る" style="animation-delay: ${index * 0.08}s;">
+          <article class="card">
+            <div class="card-top">
+              <span class="badge">おすすめ ${index + 1}</span>
             </div>
-            <div class="meta-item">
-              <span class="meta-label">難易度</span>
-              <span class="meta-value">${item.difficulty}</span>
+            <h3>${item.name}</h3>
+            <p class="description">${item.description}</p>
+            <div class="meta">
+              <div class="meta-item">
+                <span class="meta-label">調理時間</span>
+                <span class="meta-value">${item.time}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">難易度</span>
+                <span class="meta-value">${item.difficulty}</span>
+              </div>
             </div>
-          </div>
-        </article>
+            <div class="card-hint">クリックで詳細を見る</div>
+          </article>
+        </button>
       `).join("");
 
       cardsArea.innerHTML = `<div class="cards">${cardsMarkup}</div>`;
+
+      cardsArea.querySelectorAll(".card-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const item = currentSuggestions[Number(button.dataset.index)];
+          if (!item) {
+            return;
+          }
+          showDetail(item);
+        });
+      });
+    }
+
+    function renderDetail(item) {
+      const ingredientsMarkup = item.ingredients.map((ingredient) => `
+        <div class="ingredient-item">
+          <span class="ingredient-name">${ingredient.name}</span>
+          <span class="ingredient-amount">${ingredient.amount}</span>
+        </div>
+      `).join("");
+
+      const stepsMarkup = item.steps.map((step, index) => `
+        <div class="timeline-step">
+          <span class="timeline-number">${index + 1}</span>
+          <div class="timeline-body">${step}</div>
+        </div>
+      `).join("");
+
+      cardsArea.innerHTML = `
+        <section class="detail-shell">
+          <article class="detail-card">
+            <div class="detail-top">
+              <button class="back-button" id="backButton" type="button">戻る</button>
+              <div>
+                <span class="badge">${currentGenre}</span>
+                <h3 class="detail-title">${item.name}</h3>
+                <p class="detail-description">${item.description}</p>
+              </div>
+            </div>
+            <div class="detail-grid">
+              <section class="detail-section">
+                <h3>材料（2人分）</h3>
+                <div class="ingredients-grid">${ingredientsMarkup}</div>
+              </section>
+              <section class="detail-section">
+                <h3>作り方</h3>
+                <div class="timeline">${stepsMarkup}</div>
+              </section>
+              <section class="detail-section">
+                <h3>ワンポイントアドバイス</h3>
+                <p class="advice">${item.advice}</p>
+              </section>
+              <section class="detail-section">
+                <h3>基本情報</h3>
+                <div class="detail-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">調理時間</span>
+                    <span class="meta-value">${item.time}</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">難易度</span>
+                    <span class="meta-value">${item.difficulty}</span>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+        </section>
+      `;
+
+      document.getElementById("backButton").addEventListener("click", () => {
+        selectedItem = null;
+        updateHeaderForList();
+        renderCards(currentSuggestions);
+      });
+    }
+
+    function updateHeaderForList() {
+      resultTitle.textContent = `${currentGenre}のおすすめおかず`;
+      resultSubtitle.textContent = "気分に合う3品を表示しています。気に入らなければ「もう一回提案」で再抽選できます。";
+      shuffleButton.disabled = false;
+    }
+
+    function showDetail(item) {
+      selectedItem = item;
+      resultTitle.textContent = `${item.name}の詳細`;
+      resultSubtitle.textContent = "材料と手順を確認して、一覧へ戻る場合は左上のボタンを使ってください。";
+      shuffleButton.disabled = true;
+      renderDetail(item);
     }
 
     function proposeOkazu(genreName) {
       currentGenre = genreName;
+      selectedItem = null;
+      currentSuggestions = getRandomOkazu(genreName);
       updateActiveButton();
-      renderCards(getRandomOkazu(genreName));
-      resultTitle.textContent = `${genreName}のおすすめおかず`;
-      resultSubtitle.textContent = `気分に合う3品を表示しています。気に入らなければ「もう一回提案」で再抽選できます。`;
-      shuffleButton.disabled = false;
+      updateHeaderForList();
+      renderCards(currentSuggestions);
     }
 
     function createGenreButtons() {
