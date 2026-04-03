@@ -24,6 +24,7 @@
       --accent-soft: #fff3e5;
       --ok: #2fb36f;
       --over: #dc6b6b;
+      --warn: #e8b83a;
       --info: #6f8fcf;
     }
 
@@ -147,7 +148,8 @@
     }
 
     .panel-copy,
-    .helper-text {
+    .helper-text,
+    .nutrition-note {
       margin: 0;
       color: var(--text-sub);
       line-height: 1.7;
@@ -173,7 +175,8 @@
     }
 
     .field input,
-    .field textarea {
+    .field textarea,
+    .field select {
       width: 100%;
       border: 1px solid rgba(218, 193, 166, 0.9);
       border-radius: 16px;
@@ -186,7 +189,8 @@
     }
 
     .field input:focus,
-    .field textarea:focus {
+    .field textarea:focus,
+    .field select:focus {
       border-color: rgba(240, 154, 74, 0.9);
       box-shadow: 0 0 0 4px rgba(240, 154, 74, 0.14);
     }
@@ -204,7 +208,9 @@
     .primary-button,
     .secondary-button,
     .tab-button,
-    .modal-close {
+    .modal-close,
+    .icon-button,
+    .delete-button {
       border: 0;
       cursor: pointer;
       border-radius: 16px;
@@ -214,7 +220,8 @@
     }
 
     .primary-button,
-    .secondary-button {
+    .secondary-button,
+    .icon-button {
       padding: 13px 18px;
       box-shadow: 0 12px 24px rgba(69, 46, 30, 0.14);
     }
@@ -224,7 +231,10 @@
       color: #fff9f4;
     }
 
-    .secondary-button {
+    .secondary-button,
+    .icon-button,
+    .modal-close,
+    .delete-button {
       background: rgba(252, 244, 235, 0.98);
       color: #684833;
     }
@@ -233,13 +243,16 @@
     .secondary-button:hover,
     .tab-button:hover,
     .meal-button:hover,
-    .modal-close:hover {
+    .modal-close:hover,
+    .icon-button:hover,
+    .delete-button:hover {
       transform: translateY(-2px);
       filter: brightness(1.02);
     }
 
     .primary-button:disabled,
-    .secondary-button:disabled {
+    .secondary-button:disabled,
+    .icon-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
@@ -248,7 +261,7 @@
 
     .tab-bar {
       display: inline-grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
       padding: 6px;
       border-radius: 18px;
@@ -291,9 +304,45 @@
       gap: 10px;
     }
 
-    .search-shell {
+    .search-shell,
+    .record-shell {
       display: grid;
       gap: 12px;
+    }
+
+    .record-topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .date-nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .date-label {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #7a5430;
+    }
+
+    .icon-button {
+      min-width: 46px;
+      padding-inline: 14px;
+    }
+
+    .record-entry-grid {
+      display: grid;
+      grid-template-columns: 0.65fr 1.35fr auto;
+      gap: 12px;
+      align-items: end;
+      margin-top: 12px;
     }
 
     .status-area {
@@ -322,19 +371,25 @@
       color: #b64d4d;
     }
 
-    .summary-area {
+    .summary-area,
+    .record-summary-area,
+    .record-groups-area {
       margin-top: 18px;
     }
 
-    .summary-card {
+    .summary-card,
+    .record-summary-card {
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
       gap: 16px;
       padding: 20px;
       border-radius: 22px;
       background: var(--surface-strong);
       box-shadow: var(--shadow-card);
       border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .summary-card {
+      grid-template-columns: 1.3fr 0.9fr;
     }
 
     .summary-label {
@@ -361,26 +416,30 @@
       line-height: 1.7;
     }
 
-    .summary-metrics {
+    .summary-metrics,
+    .summary-quick-grid {
       display: grid;
       gap: 10px;
       align-content: start;
     }
 
-    .metric-box {
+    .metric-box,
+    .summary-chip {
       padding: 12px 14px;
       border-radius: 16px;
       background: rgba(251, 246, 240, 0.92);
     }
 
-    .metric-box span {
+    .metric-box span,
+    .summary-chip span {
       display: block;
       color: #7b6b5b;
       font-size: 0.88rem;
       margin-bottom: 5px;
     }
 
-    .metric-box strong {
+    .metric-box strong,
+    .summary-chip strong {
       font-size: 1.05rem;
     }
 
@@ -403,6 +462,230 @@
       color: var(--over);
     }
 
+    .progress-track,
+    .nutrient-track,
+    .pfc-bar {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(233, 222, 211, 0.7);
+    }
+
+    .progress-track,
+    .nutrient-track {
+      height: 12px;
+    }
+
+    .progress-fill,
+    .nutrient-fill {
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .tone-low {
+      background: #dc6b6b;
+    }
+
+    .tone-mid {
+      background: #e8b83a;
+    }
+
+    .tone-good {
+      background: #2fb36f;
+    }
+
+    .tone-over {
+      background: #f09a4a;
+    }
+
+    .record-summary-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+
+    .record-summary-title {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+    }
+
+    .progress-section,
+    .pfc-section,
+    .summary-alerts {
+      display: grid;
+      gap: 10px;
+    }
+
+    .progress-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      font-size: 0.94rem;
+      color: var(--text-sub);
+    }
+
+    .pfc-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--text-sub);
+      font-size: 0.92rem;
+    }
+
+    .pfc-bar {
+      display: flex;
+      height: 14px;
+    }
+
+    .pfc-segment.protein {
+      background: #67a85d;
+    }
+
+    .pfc-segment.fat {
+      background: #f09a4a;
+    }
+
+    .pfc-segment.carb {
+      background: #6f8fcf;
+    }
+
+    .alert-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .alert-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 245, 214, 0.95);
+      color: #8a6110;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .alert-pill.strong {
+      background: rgba(253, 230, 230, 0.95);
+      color: #b64d4d;
+    }
+
+    .details-toggle {
+      border-radius: 18px;
+      background: rgba(255, 251, 246, 0.96);
+      padding: 14px;
+    }
+
+    .details-toggle summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #724b29;
+    }
+
+    .nutrient-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .nutrient-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nutrient-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.92rem;
+    }
+
+    .nutrient-head strong {
+      font-size: 0.95rem;
+    }
+
+    .record-groups {
+      display: grid;
+      gap: 14px;
+    }
+
+    .record-group {
+      padding: 18px;
+      border-radius: 20px;
+      background: var(--surface-strong);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .record-group-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .record-group-title {
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .record-empty {
+      color: var(--text-sub);
+      padding: 10px 0 4px;
+    }
+
+    .record-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px dashed rgba(148, 124, 102, 0.26);
+    }
+
+    .record-item:first-of-type {
+      border-top: 0;
+    }
+
+    .record-item-main {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .record-item-name {
+      font-weight: 700;
+    }
+
+    .record-item-sub {
+      color: var(--text-sub);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .record-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .record-calorie {
+      font-weight: 800;
+      color: #2f7f4f;
+    }
+
+    .delete-button {
+      padding: 9px 11px;
+      box-shadow: none;
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -412,6 +695,7 @@
 
     .meal-button {
       border: 0;
+      width: 100%;
       padding: 0;
       background: transparent;
       text-align: left;
@@ -420,12 +704,19 @@
     }
 
     .meal-card {
+      display: grid;
+      gap: 10px;
       height: 100%;
       padding: 18px;
       border-radius: 22px;
       background: var(--surface-strong);
       border: 1px solid rgba(255, 255, 255, 0.92);
       box-shadow: var(--shadow-card);
+    }
+
+    .meal-card.logged {
+      border-color: rgba(47, 179, 111, 0.42);
+      box-shadow: 0 14px 28px rgba(47, 179, 111, 0.12);
     }
 
     .card-top {
@@ -453,13 +744,13 @@
     }
 
     .meal-card h3 {
-      margin: 14px 0 8px;
+      margin: 4px 0 0;
       font-size: 1.2rem;
       line-height: 1.45;
     }
 
     .description {
-      margin: 0 0 14px;
+      margin: 0;
       color: var(--text-sub);
       line-height: 1.7;
       min-height: 3.3em;
@@ -485,17 +776,38 @@
     }
 
     .ingredients-preview {
-      margin-top: 12px;
+      margin: 0;
       color: #835b36;
       font-size: 0.9rem;
       line-height: 1.6;
     }
 
     .card-hint {
-      margin-top: 12px;
       color: #9a6a3f;
       font-size: 0.86rem;
       font-weight: 700;
+    }
+
+    .check-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 4px;
+      color: #65452d;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .check-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--ok);
+      cursor: pointer;
+    }
+
+    .check-row small {
+      color: #8c6a49;
+      font-weight: 500;
     }
 
     .empty-state,
@@ -599,12 +911,6 @@
       margin-bottom: 16px;
     }
 
-    .modal-close {
-      padding: 10px 14px;
-      background: rgba(252, 244, 235, 0.98);
-      color: #684833;
-    }
-
     .modal-title {
       margin: 8px 0 8px;
       font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -688,7 +994,8 @@
       .summary-card,
       .detail-grid,
       .cards,
-      .skeleton-grid {
+      .skeleton-grid,
+      .record-entry-grid {
         grid-template-columns: 1fr;
       }
 
@@ -718,12 +1025,26 @@
 
       .tab-button,
       .primary-button,
-      .secondary-button {
+      .secondary-button,
+      .icon-button {
         width: 100%;
       }
 
       .action-row {
         display: grid;
+      }
+
+      .record-item,
+      .record-group-header,
+      .record-topbar,
+      .record-summary-header,
+      .modal-head {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .record-item-actions {
+        justify-content: space-between;
       }
     }
   </style>
@@ -733,12 +1054,12 @@
     <section class="hero">
       <div class="eyebrow">Geminiでつくるダイエット献立</div>
       <h1>朝・昼・夜をまとめて考える<br>ダイエット献立アプリ</h1>
-      <p>目標カロリーに合わせて、Gemini APIが朝食・昼食・夕食の献立を提案します。食材からの検索にも対応し、ヘルシーに続けやすい食事選びをサポートします。</p>
+      <p>目標カロリーに合わせて、Gemini APIが朝食・昼食・夕食の献立を提案します。食材からの検索にも対応し、食事記録と栄養管理までまとめて行えます。</p>
     </section>
 
     <section class="panel" aria-labelledby="settingsHeading">
       <h2 id="settingsHeading" class="panel-heading">設定エリア</h2>
-      <p class="panel-copy">Gemini APIキーと1日の目標カロリーを入力してください。設定はこの端末の `localStorage` に保存されます。</p>
+      <p class="panel-copy">Gemini APIキーと1日の目標カロリーを入力してください。設定はこの端末の <code>localStorage</code> に保存されます。</p>
       <div class="settings-grid">
         <div class="field">
           <label for="apiKeyInput">Gemini APIキー</label>
@@ -750,7 +1071,7 @@
         </div>
         <div class="settings-actions">
           <button id="saveSettingsButton" type="button" class="primary-button">設定を保存</button>
-          <p class="helper-text">デフォルトは `1650kcal` です。</p>
+          <p class="helper-text">デフォルトは <code>1650kcal</code> です。</p>
         </div>
       </div>
     </section>
@@ -759,13 +1080,14 @@
       <div class="tab-bar" role="tablist" aria-label="献立モード切替">
         <button type="button" class="tab-button active" data-tab="auto" role="tab" aria-selected="true">自動提案</button>
         <button type="button" class="tab-button" data-tab="search" role="tab" aria-selected="false">食材検索</button>
+        <button type="button" class="tab-button" data-tab="records" role="tab" aria-selected="false">食事記録</button>
       </div>
 
       <div id="autoPanel" class="mode-panel" role="tabpanel">
         <div class="mode-head">
           <div>
             <h2 id="modeHeading" class="mode-title">自動提案モード</h2>
-            <p class="panel-copy">ボタンを押すと、朝・昼・夜の3食分をまとめて生成します。</p>
+            <p class="panel-copy">ボタンを押すと、朝・昼・夜の3食分をまとめて生成します。チェックで食事記録にも反映できます。</p>
           </div>
           <div class="action-row">
             <button id="generateAutoButton" type="button" class="primary-button">献立を提案</button>
@@ -778,7 +1100,7 @@
         <div class="mode-head">
           <div>
             <h2 class="mode-title">食材検索モード</h2>
-            <p class="panel-copy">例: `卵 肉` や `鶏むね キャベツ` のように入力すると、ヘルシーな3品を提案します。</p>
+            <p class="panel-copy">例: <code>卵 肉</code> や <code>鶏むね キャベツ</code> のように入力すると、ヘルシーな3品を提案します。</p>
           </div>
         </div>
         <div class="search-shell">
@@ -792,14 +1114,57 @@
         </div>
       </div>
 
-      <div id="statusArea" class="status-area" aria-live="polite"></div>
-      <div id="summaryArea" class="summary-area"></div>
-      <section id="cardsArea" aria-live="polite">
-        <div class="empty-state">
-          <strong>まだ献立は表示されていません</strong>
-          APIキーを保存してから、`自動提案` または `食材検索` を試してください。
+      <div id="recordsPanel" class="mode-panel" role="tabpanel" hidden>
+        <div class="record-shell">
+          <div class="record-topbar">
+            <div>
+              <h2 class="mode-title">食事記録</h2>
+              <p class="panel-copy">日付ごとに食べたものを保存し、栄養素の推定結果を確認できます。</p>
+            </div>
+            <div class="date-nav">
+              <button id="prevDateButton" type="button" class="icon-button" aria-label="前の日">←</button>
+              <span class="date-label">記録日</span>
+              <input id="recordDateInput" type="date">
+              <button id="nextDateButton" type="button" class="icon-button" aria-label="次の日">→</button>
+            </div>
+          </div>
+
+          <div class="record-entry-grid">
+            <div class="field">
+              <label for="recordCategoryInput">カテゴリ</label>
+              <select id="recordCategoryInput">
+                <option value="朝食">朝食</option>
+                <option value="昼食">昼食</option>
+                <option value="夕食">夕食</option>
+                <option value="間食">間食</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="recordTextInput">食べたものを入力</label>
+              <textarea id="recordTextInput" placeholder="例: 親子丼、コンビニのおにぎり2個とサラダ"></textarea>
+            </div>
+            <div class="action-row">
+              <button id="addRecordButton" type="button" class="primary-button">記録する</button>
+            </div>
+          </div>
+
+          <p class="nutrition-note">※ 栄養素はGemini APIによる推定値であり、実際の値と差が出る場合があります。</p>
+          <div id="recordsSummaryArea" class="record-summary-area"></div>
+          <div id="recordGroupsArea" class="record-groups-area"></div>
         </div>
-      </section>
+      </div>
+
+      <div id="statusArea" class="status-area" aria-live="polite"></div>
+
+      <div id="generatedContentArea">
+        <div id="summaryArea" class="summary-area"></div>
+        <section id="cardsArea" aria-live="polite">
+          <div class="empty-state">
+            <strong>まだ献立は表示されていません</strong>
+            APIキーを保存してから、<code>自動提案</code> または <code>食材検索</code> を試してください。
+          </div>
+        </section>
+      </div>
     </section>
   </main>
 
@@ -832,8 +1197,58 @@
   <script>
     const STORAGE_KEYS = {
       apiKey: 'geminiApiKey',
-      targetCalorie: 'targetCalorie'
+      targetCalorie: 'targetCalorie',
+      records: 'dietRecords'
     };
+
+    const DAILY_RECOMMENDED = {
+      calorie: 1650,
+      protein: 65,
+      fat: 55,
+      carb: 206,
+      fiber: 21,
+      salt: 7.5,
+      vitaminA: 900,
+      vitaminB1: 1.4,
+      vitaminB2: 1.6,
+      vitaminB6: 1.4,
+      vitaminB12: 2.4,
+      vitaminC: 100,
+      vitaminD: 8.5,
+      vitaminE: 6.0,
+      folate: 240,
+      calcium: 750,
+      iron: 7.5,
+      zinc: 11,
+      magnesium: 370,
+      potassium: 2500
+    };
+
+    const NUTRIENT_META = {
+      calorie: { label: 'カロリー', unit: 'kcal', type: 'goal', digits: 0 },
+      protein: { label: 'タンパク質', unit: 'g', type: 'goal', digits: 1 },
+      fat: { label: '脂質', unit: 'g', type: 'goal', digits: 1 },
+      carb: { label: '炭水化物', unit: 'g', type: 'goal', digits: 1 },
+      fiber: { label: '食物繊維', unit: 'g', type: 'goal', digits: 1 },
+      salt: { label: '塩分', unit: 'g', type: 'limit', digits: 1 },
+      vitaminA: { label: 'ビタミンA', unit: 'μg', type: 'goal', digits: 0 },
+      vitaminB1: { label: 'ビタミンB1', unit: 'mg', type: 'goal', digits: 1 },
+      vitaminB2: { label: 'ビタミンB2', unit: 'mg', type: 'goal', digits: 1 },
+      vitaminB6: { label: 'ビタミンB6', unit: 'mg', type: 'goal', digits: 1 },
+      vitaminB12: { label: 'ビタミンB12', unit: 'μg', type: 'goal', digits: 1 },
+      vitaminC: { label: 'ビタミンC', unit: 'mg', type: 'goal', digits: 0 },
+      vitaminD: { label: 'ビタミンD', unit: 'μg', type: 'goal', digits: 1 },
+      vitaminE: { label: 'ビタミンE', unit: 'mg', type: 'goal', digits: 1 },
+      folate: { label: '葉酸', unit: 'μg', type: 'goal', digits: 0 },
+      calcium: { label: 'カルシウム', unit: 'mg', type: 'goal', digits: 0 },
+      iron: { label: '鉄', unit: 'mg', type: 'goal', digits: 1 },
+      zinc: { label: '亜鉛', unit: 'mg', type: 'goal', digits: 1 },
+      magnesium: { label: 'マグネシウム', unit: 'mg', type: 'goal', digits: 0 },
+      potassium: { label: 'カリウム', unit: 'mg', type: 'goal', digits: 0 }
+    };
+
+    const CATEGORY_LIST = ['朝食', '昼食', '夕食', '間食'];
+    const NUTRIENT_KEYS = Object.keys(NUTRIENT_META);
 
     const state = {
       mode: 'auto',
@@ -841,7 +1256,8 @@
       totalCalorie: 0,
       comment: '',
       lastTitle: '',
-      loading: false
+      loading: false,
+      selectedDate: getTodayString()
     };
 
     const apiKeyInput = document.getElementById('apiKeyInput');
@@ -854,6 +1270,15 @@
     const statusArea = document.getElementById('statusArea');
     const summaryArea = document.getElementById('summaryArea');
     const cardsArea = document.getElementById('cardsArea');
+    const generatedContentArea = document.getElementById('generatedContentArea');
+    const recordDateInput = document.getElementById('recordDateInput');
+    const prevDateButton = document.getElementById('prevDateButton');
+    const nextDateButton = document.getElementById('nextDateButton');
+    const recordCategoryInput = document.getElementById('recordCategoryInput');
+    const recordTextInput = document.getElementById('recordTextInput');
+    const addRecordButton = document.getElementById('addRecordButton');
+    const recordsSummaryArea = document.getElementById('recordsSummaryArea');
+    const recordGroupsArea = document.getElementById('recordGroupsArea');
     const detailModal = document.getElementById('detailModal');
     const detailType = document.getElementById('detailType');
     const detailTitle = document.getElementById('detailTitle');
@@ -864,6 +1289,14 @@
     const detailAdvice = document.getElementById('detailAdvice');
     const closeDetailButton = document.getElementById('closeDetailButton');
 
+    function getTodayString() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
     function escapeHtml(value = '') {
       return String(value)
         .replace(/&/g, '&amp;')
@@ -873,11 +1306,164 @@
         .replace(/'/g, '&#39;');
     }
 
+    function formatNumber(value, digits = 1) {
+      return Number(value || 0).toLocaleString('ja-JP', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: digits
+      });
+    }
+
+    function formatDateLabel(dateString) {
+      if (!dateString) {
+        return '今日';
+      }
+      const [year, month, day] = dateString.split('-');
+      return `${Number(year)}年${Number(month)}月${Number(day)}日`;
+    }
+
+    function shiftDate(dateString, offset) {
+      const date = new Date(`${dateString}T00:00:00`);
+      date.setDate(date.getDate() + offset);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function getTargetCalorie() {
+      return Number(targetCalorieInput.value) || 1650;
+    }
+
+    function getRecommendedValue(key) {
+      return key === 'calorie' ? getTargetCalorie() : DAILY_RECOMMENDED[key];
+    }
+
+    function getProgressTone(percent, type = 'goal') {
+      if (type === 'limit') {
+        if (percent <= 80) return 'tone-good';
+        if (percent <= 100) return 'tone-mid';
+        return 'tone-over';
+      }
+
+      if (percent < 50) return 'tone-low';
+      if (percent < 80) return 'tone-mid';
+      if (percent <= 120) return 'tone-good';
+      return 'tone-over';
+    }
+
+    function normalizeCategory(category) {
+      if (!category) return '間食';
+      const text = String(category);
+      if (text.includes('朝')) return '朝食';
+      if (text.includes('昼')) return '昼食';
+      if (text.includes('夕') || text.includes('夜')) return '夕食';
+      if (text.includes('間')) return '間食';
+      return '間食';
+    }
+
+    function loadJsonFromStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveJsonToStorage(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function getRecordsStore() {
+      return loadJsonFromStorage(STORAGE_KEYS.records, {});
+    }
+
+    function saveRecordsStore(store) {
+      saveJsonToStorage(STORAGE_KEYS.records, store);
+    }
+
+    function getRecordsForDate(dateString = state.selectedDate) {
+      const store = getRecordsStore();
+      return Array.isArray(store?.[dateString]?.meals) ? store[dateString].meals : [];
+    }
+
+    function saveMealsForDate(dateString, meals) {
+      const store = getRecordsStore();
+      store[dateString] = { meals };
+      saveRecordsStore(store);
+    }
+
+    function createRecordId() {
+      return `record-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+    }
+
+    function buildSourceId(meal) {
+      return `generated:${normalizeCategory(meal?.type)}:${String(meal?.name || '').trim()}`;
+    }
+
+    function isMealRecordedForDate(meal) {
+      const sourceId = buildSourceId(meal);
+      return getRecordsForDate().some((record) => record.sourceId === sourceId);
+    }
+
+    function upsertRecord(record) {
+      const meals = getRecordsForDate().filter((item) => {
+        if (record.sourceId && item.sourceId === record.sourceId) {
+          return false;
+        }
+        return item.id !== record.id;
+      });
+
+      meals.unshift(record);
+      saveMealsForDate(state.selectedDate, meals);
+    }
+
+    function removeRecordById(recordId) {
+      const meals = getRecordsForDate().filter((record) => record.id !== recordId);
+      saveMealsForDate(state.selectedDate, meals);
+    }
+
+    function removeRecordBySourceId(sourceId) {
+      const meals = getRecordsForDate().filter((record) => record.sourceId !== sourceId);
+      saveMealsForDate(state.selectedDate, meals);
+    }
+
+    function computeTotals(meals) {
+      const totals = Object.fromEntries(NUTRIENT_KEYS.map((key) => [key, 0]));
+
+      meals.forEach((record) => {
+        const nutrients = record.nutrients || {};
+        NUTRIENT_KEYS.forEach((key) => {
+          totals[key] += Number(nutrients[key]) || 0;
+        });
+      });
+
+      return totals;
+    }
+
+    function getPfcRatios(totals) {
+      const proteinCal = (Number(totals.protein) || 0) * 4;
+      const fatCal = (Number(totals.fat) || 0) * 9;
+      const carbCal = (Number(totals.carb) || 0) * 4;
+      const total = proteinCal + fatCal + carbCal;
+
+      if (!total) {
+        return { protein: 0, fat: 0, carb: 0 };
+      }
+
+      return {
+        protein: (proteinCal / total) * 100,
+        fat: (fatCal / total) * 100,
+        carb: (carbCal / total) * 100
+      };
+    }
+
     function loadSettings() {
       const savedApiKey = localStorage.getItem(STORAGE_KEYS.apiKey) || '';
       const savedTarget = Number(localStorage.getItem(STORAGE_KEYS.targetCalorie)) || 1650;
       apiKeyInput.value = savedApiKey;
       targetCalorieInput.value = savedTarget;
+      recordDateInput.value = state.selectedDate;
     }
 
     function saveSettings(showMessage = true) {
@@ -894,11 +1480,10 @@
 
       if (state.meals.length > 0) {
         renderSummary(state.lastTitle, state.meals, state.totalCalorie, state.comment);
+        renderCards(state.meals);
       }
-    }
 
-    function getTargetCalorie() {
-      return Number(targetCalorieInput.value) || 1650;
+      renderRecordsTab();
     }
 
     function renderStatus(message = '', type = 'info') {
@@ -920,6 +1505,12 @@
 
       document.getElementById('autoPanel').hidden = mode !== 'auto';
       document.getElementById('searchPanel').hidden = mode !== 'search';
+      document.getElementById('recordsPanel').hidden = mode !== 'records';
+      generatedContentArea.hidden = mode === 'records';
+
+      if (mode === 'records') {
+        renderRecordsTab();
+      }
     }
 
     function renderLoading() {
@@ -967,20 +1558,20 @@
           <div>
             <div class="summary-label">CALORIE SUMMARY</div>
             <h3 class="summary-title">${escapeHtml(title)}</h3>
-            <p class="summary-total">${safeTotal.toLocaleString('ja-JP')} kcal</p>
+            <p class="summary-total">${formatNumber(safeTotal, 0)} kcal</p>
             <p class="summary-comment">${escapeHtml(comment || '無理なく続けやすいダイエット献立です。')}</p>
           </div>
           <div class="summary-metrics">
             <div class="metric-box">
               <span>目標カロリー</span>
-              <strong>${targetCalorie.toLocaleString('ja-JP')} kcal</strong>
+              <strong>${formatNumber(targetCalorie, 0)} kcal</strong>
             </div>
             <div class="metric-box">
               <span>差分</span>
-              <strong>${Math.abs(diff).toLocaleString('ja-JP')} kcal ${withinTarget ? '余裕' : '超過'}</strong>
+              <strong>${formatNumber(Math.abs(diff), 0)} kcal ${withinTarget ? '余裕' : '超過'}</strong>
             </div>
             <div>
-              <span class="summary-status ${withinTarget ? 'ok' : 'over'}">${withinTarget ? '目標以内です！' : `${Math.abs(diff).toLocaleString('ja-JP')}kcalオーバーです`}</span>
+              <span class="summary-status ${withinTarget ? 'ok' : 'over'}">${withinTarget ? '目標以内です！' : `${formatNumber(Math.abs(diff), 0)}kcalオーバーです`}</span>
             </div>
           </div>
         </div>
@@ -996,13 +1587,16 @@
       cardsArea.innerHTML = `
         <div class="cards">
           ${meals.map((meal, index) => {
-            const previewIngredients = meal.ingredients.slice(0, 4).map((item) => item.name).join(' / ');
+            const previewIngredients = Array.isArray(meal.ingredients)
+              ? meal.ingredients.slice(0, 4).map((item) => item.name).join(' / ')
+              : '';
+            const checked = isMealRecordedForDate(meal);
             return `
-              <button class="meal-button" type="button" data-index="${index}">
-                <article class="meal-card">
+              <article class="meal-card ${checked ? 'logged' : ''}">
+                <button class="meal-button" type="button" data-index="${index}">
                   <div class="card-top">
                     <span class="meal-type">${escapeHtml(meal.type)}</span>
-                    <span class="calorie-chip">${Number(meal.calorie || 0).toLocaleString('ja-JP')}kcal</span>
+                    <span class="calorie-chip">${formatNumber(meal.calorie || 0, 0)}kcal</span>
                   </div>
                   <h3>${escapeHtml(meal.name)}</h3>
                   <p class="description">${escapeHtml(meal.description)}</p>
@@ -1012,8 +1606,13 @@
                   </div>
                   <p class="ingredients-preview">主な材料: ${escapeHtml(previewIngredients || '材料情報なし')}</p>
                   <div class="card-hint">クリックで材料・手順を表示</div>
-                </article>
-              </button>
+                </button>
+                <label class="check-row">
+                  <input class="record-checkbox" type="checkbox" data-index="${index}" ${checked ? 'checked' : ''}>
+                  <span>食べた</span>
+                  <small>${checked ? '記録済み' : 'チェックで食事記録へ追加'}</small>
+                </label>
+              </article>
             `;
           }).join('')}
         </div>
@@ -1023,6 +1622,13 @@
         button.addEventListener('click', () => {
           const index = Number(button.dataset.index);
           openDetail(state.meals[index]);
+        });
+      });
+
+      cardsArea.querySelectorAll('.record-checkbox').forEach((checkbox) => {
+        checkbox.addEventListener('change', async () => {
+          const index = Number(checkbox.dataset.index);
+          await handleGeneratedMealToggle(index, checkbox.checked);
         });
       });
     }
@@ -1036,12 +1642,16 @@
       detailTitle.textContent = meal.name;
       detailDescription.textContent = meal.description;
       detailMeta.innerHTML = `
-        <span class="pill">${Number(meal.calorie || 0).toLocaleString('ja-JP')} kcal</span>
+        <span class="pill">${formatNumber(meal.calorie || 0, 0)} kcal</span>
         <span class="pill">${escapeHtml(meal.time)}</span>
         <span class="pill">${escapeHtml(meal.difficulty)}</span>
       `;
-      detailIngredients.innerHTML = meal.ingredients.map((item) => `<li>${escapeHtml(item.name)} - ${escapeHtml(item.amount)}</li>`).join('');
-      detailSteps.innerHTML = meal.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('');
+      detailIngredients.innerHTML = Array.isArray(meal.ingredients)
+        ? meal.ingredients.map((item) => `<li>${escapeHtml(item.name)} - ${escapeHtml(item.amount)}</li>`).join('')
+        : '<li>材料情報がありません</li>';
+      detailSteps.innerHTML = Array.isArray(meal.steps)
+        ? meal.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('')
+        : '<li>手順情報がありません</li>';
       detailAdvice.textContent = meal.advice || '食べすぎ防止のため、ゆっくりよく噛んで食べるのがおすすめです。';
 
       detailModal.hidden = false;
@@ -1114,6 +1724,76 @@
 }`;
     }
 
+    function buildNutritionPromptFromText(userInput) {
+      return `あなたは管理栄養士です。
+以下の食事内容から、栄養素を推定してください。
+一般的な1人前の分量で計算してください。
+
+食事内容: ${userInput}
+
+以下のJSON形式で回答してください（JSON以外は出力しないでください）:
+{
+  "name": "メニュー名（整形したもの）",
+  "calorie": 380,
+  "protein": 15,
+  "fat": 18,
+  "carb": 40,
+  "fiber": 2,
+  "salt": 1.2,
+  "vitaminA": 120,
+  "vitaminB1": 0.1,
+  "vitaminB2": 0.2,
+  "vitaminB6": 0.1,
+  "vitaminB12": 0.8,
+  "vitaminC": 2,
+  "vitaminD": 1.5,
+  "vitaminE": 1.0,
+  "folate": 30,
+  "calcium": 50,
+  "iron": 1.5,
+  "zinc": 1.2,
+  "magnesium": 20,
+  "potassium": 200
+}`;
+    }
+
+    function buildNutritionPromptFromMeal(meal) {
+      const ingredientsList = Array.isArray(meal.ingredients)
+        ? meal.ingredients.map((item) => `${item.name} ${item.amount}`).join('、')
+        : '材料情報なし';
+
+      return `あなたは管理栄養士です。
+以下のメニューと材料から栄養素を推定してください。
+
+メニュー名: ${meal.name}
+材料: ${ingredientsList}
+
+以下のJSON形式で回答してください（JSON以外は出力しないでください）:
+{
+  "name": "メニュー名（整形したもの）",
+  "calorie": 380,
+  "protein": 15,
+  "fat": 18,
+  "carb": 40,
+  "fiber": 2,
+  "salt": 1.2,
+  "vitaminA": 120,
+  "vitaminB1": 0.1,
+  "vitaminB2": 0.2,
+  "vitaminB6": 0.1,
+  "vitaminB12": 0.8,
+  "vitaminC": 2,
+  "vitaminD": 1.5,
+  "vitaminE": 1.0,
+  "folate": 30,
+  "calcium": 50,
+  "iron": 1.5,
+  "zinc": 1.2,
+  "magnesium": 20,
+  "potassium": 200
+}`;
+    }
+
     function extractTextFromResponse(data) {
       return data?.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('') || '';
     }
@@ -1161,6 +1841,20 @@
       };
     }
 
+    function normalizeNutrientPayload(payload, fallbackName) {
+      const normalized = {
+        name: typeof payload?.name === 'string' && payload.name.trim() ? payload.name.trim() : fallbackName
+      };
+
+      NUTRIENT_KEYS.forEach((key) => {
+        const digits = NUTRIENT_META[key].digits || 0;
+        const value = Number(payload?.[key]) || 0;
+        normalized[key] = Number(value.toFixed(digits > 0 ? 1 : 0));
+      });
+
+      return normalized;
+    }
+
     async function callGemini(prompt, retryCount = 1) {
       const apiKey = localStorage.getItem(STORAGE_KEYS.apiKey);
       if (!apiKey) {
@@ -1202,7 +1896,7 @@
         }
       }
 
-      throw new Error('献立の生成に失敗しました。');
+      throw new Error('処理に失敗しました。');
     }
 
     async function generateMenus(mode) {
@@ -1250,6 +1944,7 @@
         state.meals = [];
         state.totalCalorie = 0;
         state.comment = '';
+        state.lastTitle = '';
         renderEmptyState(error.message || '献立の生成に失敗しました。');
         renderStatus(error.message || '献立の生成に失敗しました。', 'error');
       } finally {
@@ -1260,6 +1955,265 @@
       }
     }
 
+    async function handleGeneratedMealToggle(index, checked) {
+      saveSettings(false);
+      const meal = state.meals[index];
+      if (!meal) {
+        return;
+      }
+
+      const sourceId = buildSourceId(meal);
+
+      if (!checked) {
+        removeRecordBySourceId(sourceId);
+        renderRecordsTab();
+        renderCards(state.meals);
+        renderStatus('食事記録から削除しました。', 'success');
+        return;
+      }
+
+      if (!localStorage.getItem(STORAGE_KEYS.apiKey)) {
+        renderStatus('Gemini APIキーを先に保存してください。', 'error');
+        renderCards(state.meals);
+        return;
+      }
+
+      renderStatus('食べたメニューの栄養素を分析しています...', 'info');
+
+      try {
+        const analyzed = await callGemini(buildNutritionPromptFromMeal(meal), 1);
+        const nutrients = normalizeNutrientPayload(analyzed, meal.name);
+        upsertRecord({
+          id: createRecordId(),
+          category: normalizeCategory(meal.type),
+          name: nutrients.name || meal.name,
+          source: 'generated',
+          sourceId,
+          nutrients,
+          recordedAt: new Date().toISOString()
+        });
+        renderRecordsTab();
+        renderCards(state.meals);
+        renderStatus(`${normalizeCategory(meal.type)}として記録しました。`, 'success');
+      } catch (error) {
+        renderCards(state.meals);
+        renderStatus(error.message || '食事記録の分析に失敗しました。', 'error');
+      }
+    }
+
+    async function handleAddTextRecord() {
+      saveSettings(false);
+      const text = recordTextInput.value.trim();
+      const category = recordCategoryInput.value;
+
+      if (!localStorage.getItem(STORAGE_KEYS.apiKey)) {
+        renderStatus('Gemini APIキーを先に保存してください。', 'error');
+        apiKeyInput.focus();
+        return;
+      }
+
+      if (!text) {
+        renderStatus('食べたものを入力してください。', 'error');
+        recordTextInput.focus();
+        return;
+      }
+
+      addRecordButton.disabled = true;
+      renderStatus('入力内容から栄養素を分析しています...', 'info');
+
+      try {
+        const analyzed = await callGemini(buildNutritionPromptFromText(text), 1);
+        const nutrients = normalizeNutrientPayload(analyzed, text);
+        upsertRecord({
+          id: createRecordId(),
+          category,
+          name: nutrients.name || text,
+          source: 'text',
+          nutrients,
+          recordedAt: new Date().toISOString()
+        });
+        recordTextInput.value = '';
+        renderRecordsTab();
+        renderCards(state.meals);
+        renderStatus(`${category}を記録しました。`, 'success');
+      } catch (error) {
+        renderStatus(error.message || '食事記録の分析に失敗しました。', 'error');
+      } finally {
+        addRecordButton.disabled = false;
+      }
+    }
+
+    function renderRecordsTab() {
+      const meals = getRecordsForDate();
+      const totals = computeTotals(meals);
+      const targetCalorie = getTargetCalorie();
+      const intake = totals.calorie || 0;
+      const remain = Math.max(targetCalorie - intake, 0);
+      const caloriePercent = targetCalorie ? (intake / targetCalorie) * 100 : 0;
+      const calorieTone = getProgressTone(caloriePercent, 'goal');
+      const pfc = getPfcRatios(totals);
+
+      const alerts = NUTRIENT_KEYS.filter((key) => key !== 'calorie').map((key) => {
+        const recommended = getRecommendedValue(key);
+        const percent = recommended ? (Number(totals[key]) / recommended) * 100 : 0;
+        const meta = NUTRIENT_META[key];
+
+        if (meta.type === 'limit' && percent > 100) {
+          return { key, label: `${meta.label}が多め`, strong: percent > 120 };
+        }
+
+        if (meta.type === 'goal' && percent < 80) {
+          return { key, label: `${meta.label}が不足気味`, strong: percent < 50 };
+        }
+
+        return null;
+      }).filter(Boolean);
+
+      const nutrientRows = NUTRIENT_KEYS.map((key) => {
+        const meta = NUTRIENT_META[key];
+        const current = Number(totals[key]) || 0;
+        const recommended = getRecommendedValue(key);
+        const percent = recommended ? (current / recommended) * 100 : 0;
+        const tone = getProgressTone(percent, meta.type);
+        const fillWidth = Math.min(percent, 100);
+
+        return `
+          <div class="nutrient-row">
+            <div class="nutrient-head">
+              <strong>${meta.label}</strong>
+              <span>${formatNumber(current, meta.digits)} / ${formatNumber(recommended, meta.digits)} ${meta.unit}</span>
+            </div>
+            <div class="nutrient-track">
+              <div class="nutrient-fill ${tone}" style="width: ${Math.max(fillWidth, 0)}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      recordsSummaryArea.innerHTML = `
+        <div class="record-summary-card">
+          <div class="record-summary-header">
+            <div>
+              <div class="summary-label">DAILY NUTRITION</div>
+              <h3 class="record-summary-title">${escapeHtml(formatDateLabel(state.selectedDate))} の食事サマリー</h3>
+              <p class="nutrition-note">目標: ${formatNumber(targetCalorie, 0)}kcal / 摂取: ${formatNumber(intake, 0)}kcal / 残り: ${formatNumber(remain, 0)}kcal</p>
+            </div>
+            <span class="summary-status ${intake <= targetCalorie ? 'ok' : 'over'}">${intake <= targetCalorie ? '目標ペースです' : `${formatNumber(intake - targetCalorie, 0)}kcalオーバー`}</span>
+          </div>
+
+          <div class="summary-quick-grid">
+            <div class="summary-chip">
+              <span>記録件数</span>
+              <strong>${meals.length}件</strong>
+            </div>
+            <div class="summary-chip">
+              <span>PFCバランス</span>
+              <strong>P ${formatNumber(pfc.protein, 0)}% / F ${formatNumber(pfc.fat, 0)}% / C ${formatNumber(pfc.carb, 0)}%</strong>
+            </div>
+          </div>
+
+          <div class="progress-section">
+            <div class="progress-line">
+              <span>1日のカロリー進捗</span>
+              <strong>${formatNumber(caloriePercent, 0)}%</strong>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill ${calorieTone}" style="width: ${Math.min(caloriePercent, 100)}%"></div>
+            </div>
+          </div>
+
+          <div class="pfc-section">
+            <div class="progress-line">
+              <span>PFCバランス</span>
+              <strong>たんぱく質 / 脂質 / 炭水化物</strong>
+            </div>
+            <div class="pfc-bar">
+              <div class="pfc-segment protein" style="width: ${pfc.protein}%"></div>
+              <div class="pfc-segment fat" style="width: ${pfc.fat}%"></div>
+              <div class="pfc-segment carb" style="width: ${pfc.carb}%"></div>
+            </div>
+            <div class="pfc-legend">
+              <span>🟢 P ${formatNumber(pfc.protein, 0)}%</span>
+              <span>🟠 F ${formatNumber(pfc.fat, 0)}%</span>
+              <span>🔵 C ${formatNumber(pfc.carb, 0)}%</span>
+            </div>
+          </div>
+
+          <div class="summary-alerts">
+            <div class="progress-line">
+              <span>不足・過多アラート</span>
+              <strong>${alerts.length ? `${alerts.length}件` : '概ね良好'}</strong>
+            </div>
+            <div class="alert-pills">
+              ${alerts.length
+                ? alerts.map((item) => `<span class="alert-pill ${item.strong ? 'strong' : ''}">⚠ ${escapeHtml(item.label)}</span>`).join('')
+                : '<span class="alert-pill">✅ 主要栄養素はおおむね良好です</span>'}
+            </div>
+          </div>
+
+          <details class="details-toggle" open>
+            <summary>栄養素の詳細を見る</summary>
+            <div class="nutrient-list">${nutrientRows}</div>
+          </details>
+        </div>
+      `;
+
+      const categoryTotals = Object.fromEntries(CATEGORY_LIST.map((category) => [
+        category,
+        meals.filter((item) => item.category === category).reduce((sum, item) => sum + (Number(item?.nutrients?.calorie) || 0), 0)
+      ]));
+
+      recordGroupsArea.innerHTML = `
+        <div class="record-groups">
+          ${CATEGORY_LIST.map((category) => {
+            const items = meals.filter((item) => item.category === category);
+            return `
+              <section class="record-group">
+                <div class="record-group-header">
+                  <h3 class="record-group-title">${category}</h3>
+                  <strong>${formatNumber(categoryTotals[category], 0)} kcal</strong>
+                </div>
+                ${items.length
+                  ? items.map((item) => {
+                      const recordNutrientRows = NUTRIENT_KEYS.map((key) => {
+                        const meta = NUTRIENT_META[key];
+                        return `<div class="nutrient-head"><strong>${meta.label}</strong><span>${formatNumber(item?.nutrients?.[key], meta.digits)} ${meta.unit}</span></div>`;
+                      }).join('');
+
+                      return `
+                        <div class="record-item">
+                          <div class="record-item-main">
+                            <div class="record-item-name">☑ ${escapeHtml(item.name)}</div>
+                            <div class="record-item-sub">${item.source === 'generated' ? '提案メニューから記録' : '自由入力で記録'} / P ${formatNumber(item?.nutrients?.protein, 1)}g / F ${formatNumber(item?.nutrients?.fat, 1)}g / C ${formatNumber(item?.nutrients?.carb, 1)}g</div>
+                            <details class="details-toggle">
+                              <summary>この食事の栄養素を見る</summary>
+                              <div class="nutrient-list">${recordNutrientRows}</div>
+                            </details>
+                          </div>
+                          <div class="record-item-actions">
+                            <span class="record-calorie">${formatNumber(item?.nutrients?.calorie, 0)}kcal</span>
+                            <button class="delete-button" type="button" data-record-id="${escapeHtml(item.id)}" aria-label="削除">🗑</button>
+                          </div>
+                        </div>
+                      `;
+                    }).join('')
+                  : '<div class="record-empty">まだ記録なし</div>'}
+              </section>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      recordGroupsArea.querySelectorAll('.delete-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          removeRecordById(button.dataset.recordId);
+          renderRecordsTab();
+          renderCards(state.meals);
+          renderStatus('記録を削除しました。', 'success');
+        });
+      });
+    }
+
     document.querySelectorAll('.tab-button').forEach((button) => {
       button.addEventListener('click', () => switchTab(button.dataset.tab));
     });
@@ -1268,6 +2222,28 @@
     generateAutoButton.addEventListener('click', () => generateMenus('auto'));
     retryAutoButton.addEventListener('click', () => generateMenus('auto'));
     generateSearchButton.addEventListener('click', () => generateMenus('search'));
+    addRecordButton.addEventListener('click', handleAddTextRecord);
+
+    recordDateInput.addEventListener('change', () => {
+      state.selectedDate = recordDateInput.value || getTodayString();
+      renderRecordsTab();
+      renderCards(state.meals);
+    });
+
+    prevDateButton.addEventListener('click', () => {
+      state.selectedDate = shiftDate(state.selectedDate, -1);
+      recordDateInput.value = state.selectedDate;
+      renderRecordsTab();
+      renderCards(state.meals);
+    });
+
+    nextDateButton.addEventListener('click', () => {
+      state.selectedDate = shiftDate(state.selectedDate, 1);
+      recordDateInput.value = state.selectedDate;
+      renderRecordsTab();
+      renderCards(state.meals);
+    });
+
     closeDetailButton.addEventListener('click', closeDetail);
     detailModal.addEventListener('click', (event) => {
       if (event.target.dataset.close === 'true') {
@@ -1284,6 +2260,7 @@
     apiKeyInput.addEventListener('change', () => saveSettings(false));
 
     loadSettings();
+    renderRecordsTab();
     switchTab('auto');
   </script>
 </body>
